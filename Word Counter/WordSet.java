@@ -66,27 +66,27 @@ public class WordSet<K extends Comparable<K>, V> implements Counter<K, V> {
       //'s, ed, s, and ing
       //after its removed. The new form will be added
       public void put(K keyWord, V word) {
-            String strKeyWord = keyWord.toString().toLowerCase().replaceAll("[^a-zA-Z']+$"," ");  //o(1)
-            String strWord = word.toString().replaceAll("[^a-zA-Z']+$"," ");                     //o(1)
-            if(strKeyWord.endsWith("'s")) {                                                                     //o(1)
+            String strKeyWord = keyWord.toString().toLowerCase().replaceAll("[^a-zA-Z']+$"," ");  
+            String strWord = word.toString().replaceAll("[^a-zA-Z']+$"," ");                     
+            if(strKeyWord.endsWith("'s")) {                                                                   
                   strKeyWord = strKeyWord.substring(0, strKeyWord.length() - 2);
-            } else if(strKeyWord.endsWith("s")) {                                                             //o(1)
+            } else if(strKeyWord.endsWith("s")) {                                                         
                   strKeyWord = strKeyWord.substring(0, strKeyWord.length() - 1);
-            } else if(strKeyWord.endsWith("ed")) {                                                          //o(1)
+            } else if(strKeyWord.endsWith("ed")) {                                                      
                   strKeyWord = strKeyWord.substring(0, strKeyWord.length() - 2);
-            } else if(strKeyWord.endsWith("ing")) {                                                        //o(1)
+            } else if(strKeyWord.endsWith("ing")) {                                                     
                   strKeyWord = strKeyWord.substring(0, strKeyWord.length() - 3);
             }
-            WordSetObject obj = map.get(strKeyWord);                                                     //o(1)
-            if(obj == null) {                                                                         //B: o(1) W: o(n)
+            WordSetObject obj = map.get(strKeyWord);                                                 
+            if(obj == null) {                                                                       
                   map.put((K) strKeyWord, new WordSetObject(strWord));
                   return;
             }
-            obj.add(strWord);                                                                   //o(1) worst o(n)
+            obj.add(strWord);                                                               
       }
 
       public Set<K> keySet() {
-            // You do not need to change this method, but can if you want to.
+           
             return map.keySet();
       }
 }
